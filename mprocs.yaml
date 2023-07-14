@@ -1,0 +1,5 @@
+procs:
+  ghcid:
+    shell: "dev"
+  tests:
+    shell: "tst"

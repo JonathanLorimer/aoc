@@ -48,32 +48,27 @@ common common-opts
 
   build-depends:
     , aeson
-    , async
     , base
-    , binary
     , bytestring
     , containers
-    , deriving-aeson
     , foldl
-    , primitive
-    , safe-exceptions
+    , megaparsec
     , text
     , unordered-containers
     , vector
 
-  -- Codecs
-  -- Parallelism
-  -- Mutability
-  -- Binary
-  -- Containers
-  -- Utilities
   default-language:   Haskell2010
 
 library
   import:          common-opts
 
   -- cabal-fmt: expand src
-  exposed-modules: Core
+  exposed-modules:
+    Core
+    Y2015.D01
+    Y2015.D02
+    Y2015.D03
+
   hs-source-dirs:  src
 
 executable aoc
@@ -94,13 +89,21 @@ test-suite aoc-tests
   -- cabal-fmt: expand test -Main
   other-modules:
     CoreSpec
+    Property
     Spec
+    Utils
+    Y2015.D01Spec
+    Y2015.D02Spec
+    Y2015.D03Spec
 
   build-depends:
     , aoc
     , hedgehog
-    , hspec
+    , HUnit
+    , hspec               >=2.11.1
+    , hspec-api
     , hspec-core
     , hspec-discover
     , hspec-expectations
     , hspec-hedgehog
+    , pretty-simple
