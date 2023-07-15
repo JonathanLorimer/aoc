@@ -36,7 +36,3 @@ findHashWithPrefix toHash prefix  = go 0 Nothing
       let attempt = hashAttempt toHash n
           hash = if T.take lengthPrefix attempt == prefix then Just (n, attempt) else Nothing
        in go (n + 1) hash 
-
--- $> import Y2015.D04
-
--- $> findHashWithPrefix "bgvyzdsv" "00000"
