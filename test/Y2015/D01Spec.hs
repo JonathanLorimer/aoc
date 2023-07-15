@@ -12,7 +12,6 @@ import Data.List (permutations)
 import qualified Data.Text as T
 import Data.Text.IO
 import Control.Monad (forM, void)
-import Control.Monad.IO.Class (liftIO)
 
 spec :: Spec
 spec = do

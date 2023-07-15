@@ -8,13 +8,7 @@ import Text.Megaparsec.Char (char)
 import Data.Set (Set, insert, singleton, empty)
 import Data.Bifunctor
 import Data.Foldable
-
--- He begins by delivering a present to the house at his starting location, and then an elf at the North Pole calls him via 
--- radio and tells him where to move next. Moves are always exactly one house to the north (^), south (v), east (>), or west 
--- (<). After each move, he delivers another present to the house at his new location.
---
--- However, the elf back at the north pole has had a little too much eggnog, and so his directions are a little off, and 
--- Santa ends up visiting some houses more than once. How many houses receive at least one present?
+import Data.Either (partitionEithers)
 
 data Direction = North | South | East | West deriving Show
 
@@ -56,4 +50,5 @@ visitHouses = foldl' visitHouse initialCoordinates
 visitedHouses :: Coordinates -> Set (Int, Int)
 visitedHouses = foldr insert empty . reverseHistory
 
-
+splitCharWise :: String -> (String, String)
+splitCharWise str = partitionEithers $ zipWith ($) (cycle [Left, Right]) str
