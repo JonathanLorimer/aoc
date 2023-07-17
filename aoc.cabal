@@ -58,6 +58,8 @@ common common-opts
     , text
     , unordered-containers
     , vector
+    , parser-combinators
+    , mtl
 
   default-language:   Haskell2010
 
@@ -66,12 +68,14 @@ library
 
   -- cabal-fmt: expand src
   exposed-modules:
+    Utils
     Y2015.D01
     Y2015.D02
     Y2015.D03
     Y2015.D04
     Y2015.D05
     Y2015.D06
+    Y2015.D07
 
   hs-source-dirs:  src
 
@@ -101,6 +105,7 @@ test-suite aoc-tests
     Y2015.D04Spec
     Y2015.D05Spec
     Y2015.D06Spec
+    Y2015.D07Spec
 
   build-depends:
     , aoc

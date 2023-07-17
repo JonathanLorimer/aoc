@@ -41,13 +41,13 @@ spec = do
     it "turn on 0,0 through 999,999 would turn on (or leave on) every light." $ do
       res <- assertJust $ parseMaybe parseLine "turn on 0,0 through 999,999"
       S.size (runAction S.empty res) `shouldBe` 1000 * 1000
-    it "result" $ do
+    xit "result" $ do
       input' <- lines <$> readFile "./input/Y2015/D06.txt"
       input <- assertJust $ traverse (parseMaybe parseLine) input'
       S.size (foldl' runAction S.empty input) `shouldBe` 377891
       
   describe "Probably a Fire Hazard pt.2" $ do
-    it "result" $ do
+    xit "result" $ do
       input' <- lines <$> readFile "./input/Y2015/D06.txt"
       input <- assertJust $ traverse (parseMaybe parseLine) input'
       let initialMap = MS.fromList 

@@ -75,7 +75,3 @@ runActionMap m (a,r) =
       TurnOn -> foldr (adjust (+1)) m area
       TurnOff -> foldr (adjust (fromMaybe 0 . (`minusNaturalMaybe` 1))) m area
       Toggle -> foldr (adjust (+2)) m area
-
--- $> import Numeric.Natural
---
--- $> 20 `minusNaturalMaybe` 1
