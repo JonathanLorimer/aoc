@@ -81,6 +81,7 @@ library
     Y2015.D11
     Y2015.D12
     Y2015.D13
+    Y2015.D14
 
   hs-source-dirs:  src
   ghc-options:
@@ -119,6 +120,7 @@ test-suite aoc-tests
     Y2015.D11Spec
     Y2015.D12Spec
     Y2015.D13Spec
+    Y2015.D14Spec
 
   build-depends:
     , aoc

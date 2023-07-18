@@ -1,18 +1,11 @@
 module Y2015.D05 where
 
-
 import Data.Text (Text)
 import Data.Text qualified as T 
 import Data.Monoid
 import qualified Data.Set as Set
 import Data.List (tails, inits)
 import Control.Monad ((<=<))
-
-
-
--- It contains at least three vowels (aeiou only), like aei, xazegov, or aeiouaeiouaeiou.
--- It contains at least one letter that appears twice in a row, like xx, abcdde (dd), or aabbccdd (aa, bb, cc, or dd).
--- It does not contain the strings ab, cd, pq, or xy, even if they are part of one of the other requirements.
 
 vowels :: Text -> Text
 vowels = T.filter (`elem` ['a', 'e', 'i', 'o', 'u'])
