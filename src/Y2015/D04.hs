@@ -1,6 +1,6 @@
 module Y2015.D04 where
 import Data.ByteString hiding (unpack, toStrict)
-import Crypto.Hash
+import Crypto.Hash ( hashWith, MD5(MD5) )
 import Numeric.Natural (Natural)
 import qualified Data.Text as T
 import Data.Text.Lazy.Encoding (decodeUtf8)
@@ -8,7 +8,7 @@ import Data.Text.Encoding (encodeUtf8)
 import Data.ByteArray (unpack)
 import Data.Text (Text)
 import Data.Text.Lazy (toStrict)
-import Data.ByteString.Builder (toLazyByteString, word8HexFixed, lazyByteStringHex)
+import Data.ByteString.Builder (toLazyByteString, lazyByteStringHex)
 
 
 hashAttempt :: Text -> Natural -> Text

@@ -1,16 +1,15 @@
 module Y2015.D02 where
+
+import Prelude hiding (length)
 import Numeric.Natural (Natural)
-import Text.Read
-import Data.Text qualified as T
 import Data.Text (Text)
 import Text.Megaparsec (Parsec)
 import Data.Void
 import Control.Applicative
 import Text.Megaparsec.Char
-import Control.Monad (void)
 import Data.List.NonEmpty (NonEmpty(..))
 import Data.Foldable1 (foldl1')
-import Data.Foldable
+import Data.Foldable hiding (length)
 
 data RectPrism =
   RectPrism 

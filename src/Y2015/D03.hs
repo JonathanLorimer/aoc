@@ -3,9 +3,8 @@ module Y2015.D03 where
 import Text.Megaparsec hiding (empty)
 import Data.Void (Void)
 import Data.Text (Text)
-import Control.Applicative (asum)
 import Text.Megaparsec.Char (char)
-import Data.Set (Set, insert, singleton, empty)
+import Data.Set (Set, insert, empty)
 import Data.Bifunctor
 import Data.Foldable
 import Data.Either (partitionEithers)

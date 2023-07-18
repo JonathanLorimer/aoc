@@ -4,7 +4,6 @@ module Y2015.D05 where
 import Data.Text (Text)
 import Data.Text qualified as T 
 import Data.Monoid
-import Data.Foldable
 import qualified Data.Set as Set
 import Data.List (tails, inits)
 import Control.Monad ((<=<))
@@ -39,15 +38,15 @@ removeAdjacentDuplicates xs = go xs []
     go :: Eq a => [a] -> [a] -> [a]
     go [] acc = acc
     go (x:[]) acc = x:acc
-    go (a:b:xs) acc = go (if a == b then xs else b:xs) (a:acc)
+    go (a:b:rest) acc = go (if a == b then rest else b:rest) (a:acc)
 
 winFoldl :: ([a] -> b -> b) -> b -> Int -> [a] -> b
-winFoldl f acc n [] = acc
+winFoldl _ acc _ [] = acc
 winFoldl f acc n t = winFoldl f (f (take n t) acc) n (tail t) 
 
 isNiceWord2 :: Text -> Bool
-isNiceWord2 t =
-  let str = T.unpack t
+isNiceWord2 text =
+  let str = T.unpack text
       subTuples =  removeAdjacentDuplicates $ nLengthSubstrings 2 str
       rule1 = length subTuples > (Set.size . Set.fromList) subTuples
       rule2 = not . null $ winFoldl (\t b -> if length t == 3 && head t == last t then t : b else b) [] 3 str

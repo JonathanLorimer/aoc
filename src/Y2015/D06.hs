@@ -64,9 +64,9 @@ runAction s (a,r) =
 
 rectAreaList :: Rect -> [Point]
 rectAreaList (Rect (x,y) (x',y')) = do
-  x <- [x..x']
-  y <- [y..y']
-  pure (x,y)
+  a <- [x..x']
+  b <- [y..y']
+  pure (a,b)
 
 runActionMap :: Map Point Natural -> (Action, Rect) -> Map Point Natural
 runActionMap m (a,r) = 

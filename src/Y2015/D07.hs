@@ -1,31 +1,27 @@
 module Y2015.D07 where
 
 import Prelude hiding (or, and, not)
-import Numeric.Natural
-import Data.Set (Set)
-import Data.Set qualified as S
 import Data.Text (Text)
-import Text.Megaparsec (Parsec, MonadParsec (try), choice)
 import Data.Void (Void)
-import Text.Megaparsec.Char (string, digitChar, char, space, lowerChar, spaceChar, space1)
 import Control.Applicative
-import Control.Monad (void)
-import Data.Map.Strict (Map, adjust)
-import Data.Maybe
+import Data.Map.Strict (Map)
 import Data.Word (Word16)
 import qualified Data.Text as T
 import qualified Data.Map as M
 import Utils (note)
 import Data.Bits hiding (And)
-import qualified Debug.Trace as Debug
 import Text.Megaparsec.Char.Lexer (lexeme)
 import Text.Megaparsec.Char.Lexer qualified as L
 import Control.Monad.Combinators.Expr (makeExprParser, Operator (..))
 import Text.Megaparsec.Byte.Lexer (symbol)
-import Control.Monad.State.Strict (StateT, MonadState (..), MonadTrans (..))
+import Control.Monad.State.Strict (StateT, MonadState (..), gets, modify)
 import Data.Map.Strict (insert)
 import Control.Monad.Except (ExceptT, liftEither)
 import Control.Monad.IO.Class
+import Text.Megaparsec (Parsec)
+import Text.Megaparsec.Char
+import Control.Monad.Combinators (choice)
+import Control.Monad (void, join, when)
 
 data Value = Signal Word16 | Pointer Text
   deriving (Show, Eq)
@@ -49,7 +45,7 @@ pointer = fmap T.pack . lexeme sp $ some lowerChar
 
 value :: Parsec Void Text Value
 value = choice 
-  [ Signal <$> try signal 
+  [ Signal <$> signal 
   , Pointer <$> pointer
   ]
 
@@ -73,12 +69,10 @@ toTuple (Assignment t op) = (t, op)
 
 assignment :: Parsec Void Text Assignment
 assignment = do
-  op <- asum [ try operation , literal ]
-  symbol sp "->"
+  op <- asum [ operation , literal ]
+  void $ symbol sp "->"
   var <- pointer
   pure $ Assignment var op
-
--- type MonadBitLang = StateT (Map Text (Operation Value)) (Either Text) Word16
 
 isLiteralSignal :: Operation Value -> Bool
 isLiteralSignal (Literal (Signal _)) = True
@@ -87,43 +81,44 @@ isLiteralSignal _ = False
 countLiterals :: Map Text (Operation Value) -> Int
 countLiterals = length . filter isLiteralSignal . fmap snd . M.toList
 
-eval :: (Operation Value) -> StateT (Map Text (Operation Value)) (ExceptT Text IO) Word16
-eval op = 
+eval' :: Bool -> (Operation Value) -> StateT (Map Text (Operation Value)) (ExceptT Text IO) Word16
+eval' withLogging op = 
   case op of
     Literal (Signal u16) -> do
-      liftIO $ print $ "literal: " <> show u16
+      when withLogging $ liftIO $ putStrLn $ "literal: " <> show u16
       pure u16
     Literal (Pointer var) -> do 
-      env <- get
-      liftIO $ putStrLn $ "evaluating pointer: " <> T.unpack var
-      val <- liftEither $ note ("Could not find " <> var <> " in env") (M.lookup var env)
-      result <- eval val
-      liftIO $ putStrLn $ T.unpack var <> ": " <> show result
-      let newState = insert var (Literal $ Signal result) env
-      put newState
-      liftIO $ putStrLn $ "Literal Signal Count: " <> show (countLiterals newState)
+      when withLogging $ liftIO $ putStrLn $ "evaluating pointer: " <> T.unpack var
+      val <- join . gets $ liftEither . note ("Could not find " <> var <> " in env") . M.lookup var 
+      result <- eval' withLogging val
+      when withLogging $ liftIO $ putStrLn $ T.unpack var <> ": " <> show result
+      modify $ insert var (Literal $ Signal result)
+      when withLogging $ liftIO . putStrLn . mappend "Literal Signal Count: " . show . countLiterals =<< get
       pure result
-    Not op -> do
-      liftIO $ putStrLn $ "Not: " <> show op
-      val <- eval op
+    Not oper -> do
+      when withLogging $ liftIO $ putStrLn $ "Not: " <> show op
+      val <- eval' withLogging oper
       pure $ complement val
     And a b -> do
-      liftIO $ putStrLn $ "And: " <> show op
-      valA <- eval a
-      valB <- eval b
+      when withLogging $ liftIO $ putStrLn $ "And: " <> show op
+      valA <- eval' withLogging a
+      valB <- eval' withLogging b
       pure $ valA .&. valB
     Or a b -> do
-      liftIO $ putStrLn $ "Or: " <> show op
-      valA <- eval a
-      valB <- eval b
+      when withLogging $ liftIO $ putStrLn $ "Or: " <> show op
+      valA <- eval' withLogging a
+      valB <- eval' withLogging b
       pure $ valA .|. valB
     LShift var bits -> do
-      liftIO $ putStrLn $ "LShift: " <> show op
-      varValue <- eval var
-      bitsValue <- fromIntegral <$> eval bits
+      when withLogging $ liftIO $ putStrLn $ "LShift: " <> show op
+      varValue <- eval' withLogging var
+      bitsValue <- fromIntegral <$> eval' withLogging bits
       pure $ shiftL varValue bitsValue
     RShift var bits -> do
-      liftIO $ putStrLn $ "RShift: " <> show op
-      varValue <- eval var
-      bitsValue <- fromIntegral <$> eval bits
+      when withLogging $ liftIO $ putStrLn $ "RShift: " <> show op
+      varValue <- eval' withLogging  var
+      bitsValue <- fromIntegral <$> eval' withLogging bits
       pure $ shiftR varValue bitsValue
+
+eval :: (Operation Value) -> StateT (Map Text (Operation Value)) (ExceptT Text IO) Word16
+eval = eval' False

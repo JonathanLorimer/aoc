@@ -116,15 +116,25 @@ spec = do
     it "result" $ do
       input <- lines <$> readFile "./input/Y2015/D07.txt"
       let parsedInput = parseMaybe assignment <$> input
-      print $ filter (isNothing . fst) (zip parsedInput input)
       ops <- assertJustMsg "trouble parsing input" $ sequence parsedInput 
       let env = M.fromList $ toTuple <$> ops
       let litA = Literal $ Pointer "a"
       eRes <- runExceptT $ evalStateT (eval litA) env 
       res <- assertRight eRes
-      res `shouldBe` 0
-  --     
-  -- describe "Some Assembly Required pt.2" $ do
-  --   xit "result" $ do
-  --     _input <- lines <$> readFile "./input/Y2015/D07.txt"
-  --     pending
+      res `shouldBe` 46065
+
+  describe "Some Assembly Required pt.2" $ do
+    it "result" $ do
+      input <- lines <$> readFile "./input/Y2015/D07.txt"
+      let parsedInput = parseMaybe assignment <$> input
+      ops <- assertJustMsg "trouble parsing input" $ sequence parsedInput 
+
+      let firstEnv = M.fromList $ toTuple <$> ops
+      let litA = Literal $ Pointer "a"
+      eFirstRes <- runExceptT $ evalStateT (eval litA) firstEnv 
+      firstRes <- assertRight eFirstRes
+
+      let env = M.insert "b" (Literal $ Signal firstRes) firstEnv
+      eRes <- runExceptT $ evalStateT (eval litA) env 
+      res <- assertRight eRes
+      res `shouldBe` 14134
