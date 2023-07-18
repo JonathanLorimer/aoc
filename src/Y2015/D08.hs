@@ -41,11 +41,9 @@ listItem = between (char '"') (char '"') $ many listChar
 expandBackslash :: Parsec Void Text String
 expandBackslash = char '\\' >> pure "\\\\"
 
- -- \" (which represents a lone double-quote character)
 expandQuote :: Parsec Void Text String
 expandQuote = char '"' >> pure "\\\""
 
- -- \x plus two hexadecimal characters (which represents a single character by char code)
 expandHexChar :: Parsec Void Text String
 expandHexChar = do
   void $ char 'x'

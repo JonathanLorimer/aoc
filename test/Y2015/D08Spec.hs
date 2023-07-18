@@ -31,12 +31,6 @@ spec = do
       codeChars - memoryChars `shouldBe` 1371
       
   describe "Matchsticks pt.2" $ do
-
-    --
-    -- "" encodes to "\"\"", an increase from 2 characters to 6.
-    -- "abc" encodes to "\"abc\"", an increase from 5 characters to 9.
-    -- "aaa\"aaa" encodes to "\"aaa\\\"aaa\"", an increase from 10 characters to 16.
-    -- "\x27" encodes to "\"\\x27\"", an increase from 6 characters to 11.
     it "\"\" should get encoded as \\\"\\\" " $ do
       res <- assertRight $ runParser expandListItem "inline" "\"\""
       res `shouldBe` "\\\"\\\""
