@@ -31,18 +31,18 @@ spec = do
       codeChars - memoryChars `shouldBe` 1371
       
   describe "Matchsticks pt.2" $ do
-    it "\"\" should get encoded as \\\"\\\" " $ do
+    it "\"\" should get encoded as \"\\\"\\\"\" " $ do
       res <- assertRight $ runParser expandListItem "inline" "\"\""
-      res `shouldBe` "\\\"\\\""
+      res `shouldBe` "\"\\\"\\\"\""
     it "\"abc\" should get encoded as \"\\\"abc\\\"\"" $ do
       res <- assertRight $ runParser expandListItem "inline" "\"abc\""
-      res `shouldBe` "\\\"abc\\\""
-    it "\"aaa\\\"aaa\" should get encoded as \\\"aaa\\\\\\\"aaa\\\"" $ do
+      res `shouldBe` "\"\\\"abc\\\"\""
+    it "\"aaa\\\"aaa\" should get encoded as \"\\\"aaa\\\\\\\"aaa\\\"\"" $ do
       res <- assertRight $ runParser expandListItem "inline" "\"aaa\\\"aaa\""
-      res `shouldBe` "\\\"aaa\\\\\\\"aaa\\\""
-    it "\"\\x27\" should get encoded as \\\"\\\\x27\\\"" $ do
+      res `shouldBe` "\"\\\"aaa\\\\\\\"aaa\\\"\""
+    it "\"\\x27\" should get encoded as \"\\\"\\\\x27\\\"\"" $ do
       res <- assertRight $ runParser expandListItem "inline" "\"\\x27\""
-      res `shouldBe` "\\\"\\\\x27\\\""
+      res `shouldBe` "\"\\\"\\\\x27\\\"\""
     it "result" $ do
       input <- lines <$> readFile "./input/Y2015/D08.txt"
       parsedLines <- assertJust $ traverse (parseMaybe expandListItem) input

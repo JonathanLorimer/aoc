@@ -28,8 +28,7 @@ isNiceWord t =
   , not $ containsSubsequences t ["ab", "cd", "pq", "xy"]
   ]
 
-
-nLengthSubstrings :: Int -> String -> [String]
+nLengthSubstrings :: Eq a => Int -> [a] -> [[a]]
 nLengthSubstrings n = filter ((n ==) . length) . (tail . inits <=< tails)
 
 removeAdjacentDuplicates :: Eq a => [a] -> [a]

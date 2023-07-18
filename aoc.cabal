@@ -51,10 +51,9 @@ common common-opts
     , base
     , bytestring
     , containers
-    , cryptonite
+    , cryptohash-md5
     , foldl
     , megaparsec
-    , memory
     , mtl
     , parser-combinators
     , text
@@ -78,6 +77,8 @@ library
     Y2015.D07
     Y2015.D08
     Y2015.D09
+    Y2015.D10
+    Y2015.D11
 
   hs-source-dirs:  src
   ghc-options:
@@ -112,6 +113,8 @@ test-suite aoc-tests
     Y2015.D07Spec
     Y2015.D08Spec
     Y2015.D09Spec
+    Y2015.D10Spec
+    Y2015.D11Spec
 
   build-depends:
     , aoc
