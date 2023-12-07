@@ -24,10 +24,7 @@
           hsPkgs = pkgs.haskell.packages.${compilerVersion}.override {
             overrides = hfinal: hprev: {
               aoc = hfinal.callCabal2nix "aoc" ./. {};
-              # hspec-expectations = hfinal.hspec-expectations_0_8_3;
-              # hspec-core = hfinal.hspec-core_2_11_1;
-              # base-orphans = hfinal.base-orphans_0_9_0;
-              # hspec = hfinal.hspec_2_11_1;
+              hspec-api = pkgs.haskell.lib.unmarkBroken hprev.hspec;
             };
           };
         });
