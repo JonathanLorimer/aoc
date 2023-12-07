@@ -19,7 +19,7 @@
           "aarch64-darwin"
         ] (system: function rec {
           inherit system;
-          compilerVersion = "ghc962";
+          compilerVersion = "ghc963";
           pkgs = nixpkgs.legacyPackages.${system};
           hsPkgs = pkgs.haskell.packages.${compilerVersion}.override {
             overrides = hfinal: hprev: {
