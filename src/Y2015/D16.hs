@@ -12,7 +12,6 @@ import Text.Megaparsec
 import Text.Megaparsec.Char
 import Text.Megaparsec.Char.Lexer qualified as L
 import Data.List qualified as List
-import Data.Bifunctor
 
 data Sue a = Sue
   { number :: Natural
