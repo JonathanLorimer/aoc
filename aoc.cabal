@@ -52,11 +52,18 @@ common common-opts
     , bytestring
     , containers
     , cryptohash-md5
+    , data-fix
+    , deepseq
+    , dlist
     , megaparsec
     , mtl
     , parser-combinators
+    , parsers
+    , pretty-simple
     , scientific
+    , split
     , text
+    , text-builder
     , unordered-containers
     , vector
 
@@ -86,6 +93,7 @@ library
     Y2015.D16
     Y2015.D17
     Y2015.D18
+    Y2015.D19
 
   hs-source-dirs:  src
   ghc-options:
@@ -129,6 +137,7 @@ test-suite aoc-tests
     Y2015.D16Spec
     Y2015.D17Spec
     Y2015.D18Spec
+    Y2015.D19Spec
 
   build-depends:
     , aoc

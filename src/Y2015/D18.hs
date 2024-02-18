@@ -9,7 +9,6 @@ import Text.Megaparsec
 import Text.Megaparsec.Char
 import Text.Megaparsec.Char.Lexer qualified as L
 import Control.Applicative (asum)
-import Data.Bifunctor
 import Numeric.Natural
 import Data.Maybe
 import Data.List
