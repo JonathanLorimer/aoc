@@ -7,7 +7,7 @@ import Data.Text.IO (readFile)
 import Data.Text (lines)
 import Y2015.D16
 import Text.Megaparsec
-import Utils
+import TestUtils
 import Control.Monad (void)
 
 spec :: Spec

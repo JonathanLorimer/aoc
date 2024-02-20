@@ -1,4 +1,4 @@
-module Utils where
+module TestUtils where
 
 import Test.HUnit
 import Control.Monad (forM_)

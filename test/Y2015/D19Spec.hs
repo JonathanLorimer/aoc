@@ -5,7 +5,7 @@ import Prelude hiding (readFile, lines)
 import Test.Hspec
 import Data.Text.IO (readFile)
 import Y2015.D19
-import Utils
+import TestUtils
 import Data.Containers.ListUtils (nubOrd)
 
 spec :: Spec
@@ -18,6 +18,7 @@ spec = do
           uniqueCalibrations = nubOrd calibrations
           numUniqueCalibrations = length uniqueCalibrations
       numUniqueCalibrations `shouldBe` 535
+  describe "Day 19: Medicine for Rudolph Pt. 2" $ do
     it "result" $ do
       input <- readFile "./input/Y2015/D19.txt"
       MoleculeData{..} <- assertParse moleculeDataP input

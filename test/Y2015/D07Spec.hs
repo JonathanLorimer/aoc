@@ -7,8 +7,7 @@ import Data.Text (lines)
 import Y2015.D07
 import Text.Megaparsec
 import Data.Map.Strict qualified as M
-import Utils (assertRight, assertJustMsg)
-import Data.Maybe
+import TestUtils (assertRight, assertJustMsg)
 import Control.Monad.State.Strict (evalStateT)
 import Control.Monad.Except (runExceptT)
 

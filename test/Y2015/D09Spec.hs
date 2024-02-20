@@ -5,7 +5,7 @@ import Prelude hiding (readFile, lines)
 import Test.Hspec
 import Data.Text.IO (readFile)
 import Data.Text (lines)
-import Utils (assertJust)
+import TestUtils (assertJust)
 import Text.Megaparsec (parseMaybe)
 import Y2015.D09
 

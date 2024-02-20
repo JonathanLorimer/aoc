@@ -7,7 +7,7 @@ import Data.Text.IO (readFile)
 import Data.Text (lines)
 import Y2015.D18 
 import Text.Megaparsec (parseMaybe)
-import Utils
+import TestUtils
 import Control.Monad
 import Numeric.Natural (Natural)
 import Data.Map.Strict qualified as M

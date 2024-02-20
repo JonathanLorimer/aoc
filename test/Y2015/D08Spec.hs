@@ -6,7 +6,7 @@ import Test.Hspec
 import Data.Text.IO (readFile)
 import Data.Text (lines)
 import Y2015.D08 
-import Utils (assertJust, assertRight)
+import TestUtils (assertJust, assertRight)
 import Text.Megaparsec (parseMaybe, runParser)
 import Data.Monoid (Sum(..))
 import qualified Data.Text as T

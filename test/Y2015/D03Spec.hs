@@ -8,7 +8,7 @@ import Data.Text qualified as T
 import Data.Set (size, union)
 import Y2015.D03
 import Text.Megaparsec (parseMaybe)
-import Utils (assertJust)
+import TestUtils (assertJust)
 import Data.Text (strip)
 import Data.Bifunctor
 

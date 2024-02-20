@@ -48,6 +48,7 @@ common common-opts
 
   build-depends:
     , aeson
+    , arithmoi
     , base
     , bytestring
     , containers
@@ -94,6 +95,7 @@ library
     Y2015.D17
     Y2015.D18
     Y2015.D19
+    Y2015.D20
 
   hs-source-dirs:  src
   ghc-options:
@@ -118,7 +120,7 @@ test-suite aoc-tests
   other-modules:
     Property
     Spec
-    Utils
+    TestUtils
     Y2015.D01Spec
     Y2015.D02Spec
     Y2015.D03Spec
@@ -138,6 +140,7 @@ test-suite aoc-tests
     Y2015.D17Spec
     Y2015.D18Spec
     Y2015.D19Spec
+    Y2015.D20Spec
 
   build-depends:
     , aoc

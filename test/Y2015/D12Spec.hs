@@ -5,7 +5,7 @@ import Prelude hiding (readFile, lines)
 import Test.Hspec
 import Y2015.D12 
 import Data.ByteString as B
-import Utils (assertJust)
+import TestUtils (assertJust)
 import Data.Aeson (decodeStrict)
 
 spec :: Spec

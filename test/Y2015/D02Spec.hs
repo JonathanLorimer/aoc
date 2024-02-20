@@ -8,7 +8,7 @@ import Data.Text.IO (readFile)
 import Data.Text qualified as T
 import Text.Megaparsec (parseMaybe)
 import Data.Monoid
-import Utils (assertJust)
+import TestUtils (assertJust)
 
 spec :: Spec
 spec = do

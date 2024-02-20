@@ -4,7 +4,7 @@ import Prelude hiding (readFile, lines)
 
 import Test.Hspec
 import Y2015.D11 
-import Utils (assertJust)
+import TestUtils (assertJust)
 import Text.Megaparsec (parseMaybe)
 import Data.Char (toLower)
 import Data.Foldable
