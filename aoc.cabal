@@ -37,6 +37,7 @@ common common-opts
     MultiWayIf
     NamedFieldPuns
     NumericUnderscores
+    OverloadedRecordDot
     OverloadedStrings
     RecordWildCards
     ScopedTypeVariables
@@ -96,6 +97,7 @@ library
     Y2015.D18
     Y2015.D19
     Y2015.D20
+    Y2015.D21
 
   hs-source-dirs:  src
   ghc-options:
@@ -141,6 +143,7 @@ test-suite aoc-tests
     Y2015.D18Spec
     Y2015.D19Spec
     Y2015.D20Spec
+    Y2015.D21Spec
 
   build-depends:
     , aoc
