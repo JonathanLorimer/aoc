@@ -1,9 +1,9 @@
-{-# LANGUAGE TemplateHaskell #-}
 module Y2015.D01 where
 
 import Prelude hiding (floor)
 
 import Data.Text
+import Data.Maybe
 
 countParens :: Text -> Int
 countParens = foldl' countParen 0
@@ -27,7 +27,7 @@ firstBasement' = foldl' checkFloor (FloorState 1 0 Nothing)
     checkFloor fs '(' = fs { floor = floor fs + 1, position = position fs + 1 }
     checkFloor fs ')' = 
       let newFloor = floor fs - 1
-       in if newFloor == -1 && firstBasementPosition fs == Nothing
+       in if newFloor == -1 && isNothing (firstBasementPosition fs)
             then 
               fs 
                { floor = newFloor

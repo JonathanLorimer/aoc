@@ -11,7 +11,7 @@ import Y2015.D01 (countParens, firstBasement)
 import Data.List (permutations)
 import qualified Data.Text as T
 import Data.Text.IO
-import Control.Monad (forM, void)
+import Data.Foldable
 
 spec :: Spec
 spec = do
@@ -35,7 +35,7 @@ spec = do
         parens <- forAll $ Gen.string (Range.linear 0 5) genParen
         let perms = T.pack <$> permutations parens
         let reference = countParens $ T.pack parens
-        void $ forM perms $ \perm -> reference === countParens perm
+        forM_ perms $ \perm -> reference === countParens perm
     it "result" $ do
       input <- readFile "./input/Y2015/D01.txt"
       countParens input `shouldBe` 232
