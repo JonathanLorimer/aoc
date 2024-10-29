@@ -16,3 +16,12 @@ upsert transform combine k v = alter (Just . go) k
     
 (-.-) :: Natural -> Natural -> Natural
 n -.- m = fromMaybe 0 $ minusNaturalMaybe n m
+
+newtype NatMin = NatMin { getNatural :: Natural }
+  deriving newtype (Eq, Ord, Show, Num)
+
+instance Semigroup NatMin where
+  (<>) = min  
+
+instance Monoid NatMin where
+  mempty = 0

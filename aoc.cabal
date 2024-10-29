@@ -98,6 +98,7 @@ library
     Y2015.D19
     Y2015.D20
     Y2015.D21
+    Y2015.D22
 
   hs-source-dirs:  src
   ghc-options:
@@ -144,11 +145,12 @@ test-suite aoc-tests
     Y2015.D19Spec
     Y2015.D20Spec
     Y2015.D21Spec
+    Y2015.D22Spec
 
   build-depends:
     , aoc
     , hedgehog
-    , hspec               >=2.11.1
+    , hspec
     , hspec-api
     , hspec-core
     , hspec-discover

@@ -68,7 +68,7 @@ allKits = do
   w <- weapons
   hasArmor <- [True, False]
   a' <- armory
-  numRings <- [0,1,2]
+  numRings :: Integer <- [0,1,2]
   let a = [a' | hasArmor]
   case numRings of
     0 -> pure $ [w] <> a

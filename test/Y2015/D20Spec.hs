@@ -16,7 +16,8 @@ spec = do
       input :: Int <- read . T.unpack <$> readFile "./input/Y2015/D20.txt"
       (i, _) <- assertJust $ L.find (\pres -> input <= snd pres) $ housePresentList allDivisors
       i `shouldBe` 831600
+  describe "Day 20: Infinite Elves and Infinite Houses Pt. 2" $ do
     it "result" $ do
       input :: Int <- read . T.unpack <$> readFile "./input/Y2015/D20.txt"
       (i, _) <- assertJust $ L.find (\pres -> input <= snd pres) $ housePresentList only50
-      i `shouldBe` 831600
+      i `shouldBe` 884520
